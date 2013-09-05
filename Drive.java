@@ -12,13 +12,21 @@ public class Drive implements Container {
 
 	private String name;
 	private ArrayList<Element> children;
+
+	public Drive(String name) {
+		this.name = name;
+		this.children = new ArrayList<Element>();
+	}
 	
-	// TODO constructor/children handling
+	public Drive(String name, ArrayList<Element> children) {
+		this.name = name;
+		this.children = children;
+	}
 	
 	public String getPath() {
 		return "/" + name;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -35,10 +43,25 @@ public class Drive implements Container {
 	}
 
 	public void addChild(Element child) {
-		children.add(child);
+		for(Element e:children) {
+			if(e.getName() != child.getName())
+				children.add(child);
+			else
+				System.out.println("\nFile path already exists.\n");
+		}
 	}
 
-	// TODO remove child
+	public void removeChild(Element child) {
+		children.remove(child);
+	}
+	
+	public void print() {
+		System.out.println(name);
+		for(Element e:children) {
+			e.print();
+		}
+	}
+	
 	// TODO search
 
 }

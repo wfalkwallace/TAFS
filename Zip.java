@@ -11,11 +11,21 @@ import java.util.ArrayList;
 public class Zip implements Container, Element {
 
 	private String name;
-	private ArrayList<Element> children;
 	private Container parent;
+	private ArrayList<Element> children;
 	
-	// TODO constructor/children handling
-
+	public Zip(String name, Container parent) {
+		this.name = name;
+		this.parent = parent;
+		this.children = new ArrayList<Element>();
+	}
+	
+	public Zip(String name, Container parent, ArrayList<Element> children) {
+		this.name = name;
+		this.parent = parent;
+		this.children = children;
+	}
+	
 	public Container getParent() {
 		return parent;
 	}
@@ -40,10 +50,25 @@ public class Zip implements Container, Element {
 	}
 
 	public void addChild(Element child) {
-		children.add(child);
+		for(Element e:children) {
+			if(e.getName() != child.getName())
+				children.add(child);
+			else
+				System.out.println("\nFile path already exists.\n");
+		}
 	}
 
-	// TODO remove child
+	public void removeChild(Element child) {
+		children.remove(child);
+	}
+	
+	public void print() {
+		System.out.println(name);
+		for(Element e:children) {
+			e.print();
+		}
+	}
+	
 	// TODO search
 
 }

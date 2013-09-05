@@ -14,8 +14,18 @@ public class Folder implements Container, Element {
 	private ArrayList<Element> children;
 	private Container parent;
 	
-	// TODO constructor/children handling
-
+	public Folder(String name, Container parent) {
+		this.name = name;
+		this.parent = parent;
+		this.children = new ArrayList<Element>();
+	}
+	
+	public Folder(String name, Container parent, ArrayList<Element> children) {
+		this.name = name;
+		this.parent = parent;
+		this.children = children;
+	}
+	
 	public Container getParent() {
 		return parent;
 	}
@@ -40,10 +50,18 @@ public class Folder implements Container, Element {
 	}
 
 	public void addChild(Element child) {
-		children.add(child);
+		for(Element e:children) {
+			if(e.getName() != child.getName())
+				children.add(child);
+			else
+				System.out.println("\nFile path already exists.\n");
+		}
 	}
 
-	// TODO remove child
+	public void removeChild(Element child) {
+		children.remove(child);
+	}
+	
 	// TODO search
 	
 }

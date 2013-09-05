@@ -12,5 +12,6 @@ public interface Element {
 	public String getName();
 	public int getSize();
 	public Container getParent();
+	public void print();
 	
 }
