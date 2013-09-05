@@ -18,7 +18,7 @@ public class Element {
 
 
 	//drives
-	public Element(String name, String type) {
+	public Element(String name) {
 		this.name = name;
 		this.type = "drive";
 		parent = null;
@@ -26,13 +26,17 @@ public class Element {
 		children = new ArrayList<Element>();
 	}
 
-	//folders, zips
+	//folders, zips, and apparently text files? guidelines are a bit 
+	//ambiguous here - are drives supposed to be created with a null-parent/path?
 	public Element(String name, String type, Element parent) {
 		this.name = name;
 		this.type = type.toLowerCase();
 		this.parent = parent;
 		contents = "";
-		this.children = new ArrayList<Element>();
+		if(type.equals("text"))
+			children = null;
+		else
+			children = new ArrayList<Element>();
 	}
 
 	//text files
@@ -44,7 +48,7 @@ public class Element {
 
 		//maybe a little bloated for text files to all have children at all, but so
 		//much simpler to just check type in addChild instead of both here and there.
-		this.children = null;
+		children = null;
 	}
 
 	public String getPath() {
@@ -67,7 +71,7 @@ public class Element {
 		if(size == 0) 
 			for(Element e:children)
 				size += e.getSize();
-		if(type == "zip")
+		if(type.equals("zip"))
 			size /= 2;
 		return size;
 	}
@@ -81,16 +85,16 @@ public class Element {
 	}
 
 	public void setParent(Element parent) throws TAFSException {
-		if(type == "drive")
+		if(type.equals("drive"))
 			this.parent = parent;
 		else
 			throw new TAFSException("Illegal File System Operation");
 	}
 
 	public void addChild(Element child) throws TAFSException {
-		if(type != "text")
+		if(!type.equals("text"))
 			for(Element e:children) {
-				if(e.getName() != child.getName())
+				if(!e.getName().equals(child.getName()))
 					children.add(child);
 				else
 					throw new TAFSException("Path already exists");
@@ -100,7 +104,7 @@ public class Element {
 	}
 
 	public void removeChild(Element child) throws TAFSException {
-		if(type != "text")
+		if(!type.equals("text"))
 			if(!children.remove(child))
 				throw new TAFSException("Path Not Found");
 	}
