@@ -58,7 +58,7 @@ public class Drive implements Container {
 	public void print() {
 		System.out.println(name);
 		for(Element e:children) {
-			e.print();
+			e.print(1);
 		}
 	}
 	

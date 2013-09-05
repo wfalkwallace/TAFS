@@ -62,10 +62,14 @@ public class Zip implements Container, Element {
 		children.remove(child);
 	}
 	
-	public void print() {
+	public void print(int depth) {
+		for(int i = 1; i < depth; i++){
+			System.out.print("  ");
+		}
+		System.out.print("|_");
 		System.out.println(name);
 		for(Element e:children) {
-			e.print();
+			e.print(depth+1);
 		}
 	}
 	

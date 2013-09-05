@@ -53,5 +53,13 @@ public class Text implements Element {
 	public String getPath() {
 		return parent.getPath() + "/" + name;
 	}
+	
+	public void print(int depth) {
+		for(int i = 1; i < depth; i++){
+			System.out.print("  ");
+		}
+		System.out.print("|_");
+		System.out.println(name);
+	}
 
 }

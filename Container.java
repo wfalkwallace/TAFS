@@ -15,6 +15,5 @@ public interface Container {
 	public int getSize();
 	public ArrayList<Element> getChildren();
 	public void addChild(Element child);
-	public void print();
 
 }
