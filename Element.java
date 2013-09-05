@@ -15,6 +15,7 @@ public class Element {
 	private Element parent;
 	private ArrayList<Element> children;
 
+	//drives
 	public Element(String name, String type) {
 		this.name = name;
 		this.type = type;
@@ -22,13 +23,18 @@ public class Element {
 		this.children = new ArrayList<Element>();
 	}
 	
+	//folders, zips and text files
 	public Element(String name, String type, Element parent) {
 		this.name = name;
 		this.type = type;
 		this.parent = parent;
+		//maybe a little bloated for text files to all have an empty set of children, 
+		//but so much simpler to just check type in addChild instead of both here and
+		//there.
 		this.children = new ArrayList<Element>();
 	}
 	
+	//probably don't need to recreate drives... for completeness I guess though?
 	public Element(String name, String type, ArrayList<Element> children) {
 		this.name = name;
 		this.type = type;
@@ -36,7 +42,7 @@ public class Element {
 		this.children = children;
 	}
 	
-	//sub-folders and zips
+	//probably don't need to recreate sub-folders and zips with predefined children sets
 	public Element(String name, String type, Element parent, ArrayList<Element> children) {
 		this.name = name;
 		this.type = type;
