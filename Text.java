@@ -12,6 +12,10 @@ public class Text implements Element {
 	private Container parent;
 	private String contents;
 	
+	public Text() {
+		
+	}
+	
 	public Text(String name, Container parent) {
 		this.name = name;
 		this.parent = parent;

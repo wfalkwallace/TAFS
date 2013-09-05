@@ -13,6 +13,10 @@ public class Folder implements Container, Element {
 	private String name;
 	private ArrayList<Element> children;
 	private Container parent;
+
+	public Folder() {
+		
+	}
 	
 	public Folder(String name, Container parent) {
 		this.name = name;
@@ -37,7 +41,7 @@ public class Folder implements Container, Element {
 	public String getName() {
 		return name;
 	}
-	@Override
+
 	public int getSize() {
 		int size = 0;
 		for(Element e:children)
@@ -49,12 +53,12 @@ public class Folder implements Container, Element {
 		return children;
 	}
 
-	public void addChild(Element child) {
+	public void addChild(Element child) throws TAFSException {
 		for(Element e:children) {
 			if(e.getName() != child.getName())
 				children.add(child);
 			else
-				System.out.println("\nFile path already exists.\n");
+				throw new TAFSException("Path already exists");
 		}
 	}
 
@@ -71,6 +75,10 @@ public class Folder implements Container, Element {
 		for(Element e:children) {
 			e.print(depth+1);
 		}
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	// TODO search

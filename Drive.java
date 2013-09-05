@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author wgf2104
  *
  */
-public class Drive implements Container {
+public class Drive implements Element, Container {
 
 	private String name;
 	private ArrayList<Element> children;
@@ -42,12 +42,12 @@ public class Drive implements Container {
 		return children;
 	}
 
-	public void addChild(Element child) {
+	public void addChild(Element child) throws TAFSException {
 		for(Element e:children) {
 			if(e.getName() != child.getName())
 				children.add(child);
 			else
-				System.out.println("\nFile path already exists.\n");
+				throw new TAFSException("Path already exists");
 		}
 	}
 
@@ -55,11 +55,19 @@ public class Drive implements Container {
 		children.remove(child);
 	}
 	
-	public void print() {
+	public void print(int depth) {
 		System.out.println(name);
 		for(Element e:children) {
-			e.print(1);
+			e.print(depth + 1);
 		}
+	}
+
+	public Container getParent() {
+		return null;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	// TODO search

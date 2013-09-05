@@ -14,6 +14,6 @@ public interface Container {
 	public String getName();
 	public int getSize();
 	public ArrayList<Element> getChildren();
-	public void addChild(Element child);
+	public void addChild(Element child) throws TAFSException;
 
 }
