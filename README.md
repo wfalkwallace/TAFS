@@ -24,24 +24,24 @@ Every entity has the following properties:
 - Path – The concatenation of the names of the containing entities, from the drive down to and including the entity. The names are separated by ‘\’.
 - A text file has a property called Content which is a string.
 - Size – an integer defined as follows:
-­- - For a text file – it is the length of its content.
-­- - For a drive or a folder, it is the sum of all sizes of the entities it contains.
-­- - For a zip file, it is one half of the sum of all sizes of the entities it contains.
+­-- For a text file – it is the length of its content.
+­-- For a drive or a folder, it is the sum of all sizes of the entities it contains.
+­-- For a zip file, it is one half of the sum of all sizes of the entities it contains.
 
 The system should be capable of supporting file­system like operations
 
 - Create – Creates a new entity.
-­- - Arguments: Type, Name, Path of parent.
-­- - Exceptions: Path not found; Path already exists; Illegal File System Operation (if any of the rules a­d above is violated).
+­-- Arguments: Type, Name, Path of parent.
+­-- Exceptions: Path not found; Path already exists; Illegal File System Operation (if any of the rules a­d above is violated).
 - Delete – Deletes an existing entity (and all the entities it contains).
-­- - Arguments: Path
-­- - Exceptions: Path not found.
+­-- Arguments: Path
+­-- Exceptions: Path not found.
 - Move – Changing the parent of an entity.
-­- - Arguments: Source Path, Destination Path.
-­- - Exceptions: Path not found; Path already exists, Illegal File System Operation.
+­-- Arguments: Source Path, Destination Path.
+­-- Exceptions: Path not found; Path already exists, Illegal File System Operation.
 - WriteToFile – Changes the content of a text file.
-­- - Arguments: Path, Content
-­- - Exceptions: Path not found; Not a text file.
+­-- Arguments: Path, Content
+­-- Exceptions: Path not found; Not a text file.
 
 __Tasks:__
 - Come up with the design for this system. Full implementation is not required, but only to the level which you feel is a “proof of concept”.
