@@ -12,77 +12,90 @@ public class Element {
 
 	private String name;
 	private String type;
+	private String contents;
 	private Element parent;
 	private ArrayList<Element> children;
+
 
 	//drives
 	public Element(String name, String type) {
 		this.name = name;
-		this.type = type;
-		this.parent = null;
-		this.children = new ArrayList<Element>();
+		this.type = "drive";
+		parent = null;
+		contents = "";
+		children = new ArrayList<Element>();
 	}
-	
-	//folders, zips and text files
+
+	//folders, zips
 	public Element(String name, String type, Element parent) {
 		this.name = name;
-		this.type = type;
+		this.type = type.toLowerCase();
 		this.parent = parent;
-		//maybe a little bloated for text files to all have an empty set of children, 
-		//but so much simpler to just check type in addChild instead of both here and
-		//there.
+		contents = "";
 		this.children = new ArrayList<Element>();
 	}
-	
-	//probably don't need to recreate drives... for completeness I guess though?
-	public Element(String name, String type, ArrayList<Element> children) {
+
+	//text files
+	public Element(String name, Element parent, String contents) {
+		type = "text";
 		this.name = name;
-		this.type = type;
-		this.parent = null;
-		this.children = children;
-	}
-	
-	//probably don't need to recreate sub-folders and zips with predefined children sets
-	public Element(String name, String type, Element parent, ArrayList<Element> children) {
-		this.name = name;
-		this.type = type;
 		this.parent = parent;
-		this.children = new ArrayList<Element>();
+		this.contents = contents;
+
+		//maybe a little bloated for text files to all have children at all, but so
+		//much simpler to just check type in addChild instead of both here and there.
+		this.children = null;
 	}
-	
-	
+
 	public String getPath() {
-		return "/" + name;
+		//calculating dynamically is easier than updating on all changes, maybe a bit bloated.
+		if(parent != null)
+			return parent.getPath() + "/" + name;
+		return name;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public int getSize() {
-		int size = 0;
-		for(Element e:children)
-			size += e.getSize();
+		int size = contents.length();
+		if(size == 0) 
+			for(Element e:children)
+				size += e.getSize();
+		if(type == "zip")
+			size /= 2;
 		return size;
 	}
 
 	public ArrayList<Element> getChildren() {
 		return children;
 	}
+	
+	public Element getParent() {
+		return parent;
+	}
 
-	public void addChild(Element child) throws TAFSException {
+	public void setParent(Element parent) {
+		this.parent = parent;
+	}
+	
+	public void addChild(Element child) {
+		if(type !=)
 		for(Element e:children) {
 			if(e.getName() != child.getName())
 				children.add(child);
-			else
-				throw new TAFSException("Path already exists");
 		}
 	}
 
 	public void removeChild(Element child) {
 		children.remove(child);
 	}
-	
+
 	public void print(int depth) {
 		System.out.println(name);
 		for(Element e:children) {
@@ -90,14 +103,7 @@ public class Element {
 		}
 	}
 
-	public Container getParent() {
-		return null;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+
 	// TODO search
 
 }
