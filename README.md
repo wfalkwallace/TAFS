@@ -49,6 +49,15 @@ The system should be capable of supporting file­system like operations
 
 ---
 
+####v0.1u
+Unfinished: first attempt/idea-salad; more object oriented (types are all individual classes) but uselessly complicated. interfacing the element/container relationship helped a little but not enough. 
+
 #####Lessons Learned:
 1. Probably would've been much easier to make a tree/graph and an _element_ object with a type _attribute_; it would get rid of all of the class.forName junk. It would've been easier to traverse and check path validity also. Next episode of code golf…
 2. Might have been useful to implement equals/hashcode/comparable by name and cut a loop from each of the searches; that would simplify the traversal/search as well, cutting down on conditionals.
+
+---
+
+####v0.2
+
+#####Lessons Learned:
