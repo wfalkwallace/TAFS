@@ -43,9 +43,9 @@ The system should be capable of supporting file­system like operations
 
 ###Tasks:
 
-- [x] Come up with the design for this system. Full implementation is not required, but only to the level which you feel is a “proof of concept”.
-- [x] Show a sketch of implementation of the Move operation.
-- [x] Explicitly implement the property Size.
+[x] Come up with the design for this system. Full implementation is not required, but only to the level which you feel is a “proof of concept”.
+[x] Show a sketch of implementation of the Move operation.
+[x] Explicitly implement the property Size.
 
 ---
 
