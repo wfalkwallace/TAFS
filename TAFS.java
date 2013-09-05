@@ -10,16 +10,21 @@ import java.util.ArrayList;
  */
 public class TAFS {
 
-	private ArrayList<Drive> root = new ArrayList<Drive>();
+	private ArrayList<Element> root = new ArrayList<Element>();
 	
 	//TODO illegal file system operation
+
 	
 	private void create(String type, String name, String path) {
-		//TODO Exceptions: path not found; path already exists
-		try {
+		//TODO Exceptions: path not found
 			String[] pathlist = path.split("/");
-			String pwd = "root";
+			Element pwd = "root";
 			for(int i = 0; i < pathlist.length; i++){
+				for(Element e:pwd)
+					if(e.getName().equals(pathlist[i]))
+						pwdlist = pwd.getChildren();
+
+
 				
 			}
 			root.get(root.indexOf(o))
