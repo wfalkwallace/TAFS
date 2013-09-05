@@ -75,35 +75,42 @@ public class Element {
 	public ArrayList<Element> getChildren() {
 		return children;
 	}
-	
+
 	public Element getParent() {
 		return parent;
 	}
 
 	public void setParent(Element parent) {
-		this.parent = parent;
+		if(type == "drive")
+			this.parent = parent;
+		else
+			//TODO throw illegal op
 	}
-	
+
 	public void addChild(Element child) {
-		if(type !=)
-		for(Element e:children) {
-			if(e.getName() != child.getName())
-				children.add(child);
-		}
+		if(type != "text")
+			for(Element e:children) {
+				if(e.getName() != child.getName())
+					children.add(child);
+				else
+					//TODO throw path exists
+			}
+		else
+			//TODO illegal op
 	}
 
 	public void removeChild(Element child) {
-		children.remove(child);
+		if(type != "text")
+			if(!children.remove(child))
+				//TODO throw path not found
 	}
 
 	public void print(int depth) {
+		for(int i = 0; i < depth; i++)
+			System.out.print(" |_");
 		System.out.println(name);
 		for(Element e:children) {
 			e.print(depth + 1);
 		}
 	}
-
-
-	// TODO search
-
 }

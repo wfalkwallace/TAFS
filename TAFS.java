@@ -42,5 +42,7 @@ public class TAFS {
 	writeToFile(String path, String contents) {
 		//TODO Exceptions: path not found; not a text file 
 	}
+	
+	//TODO search
 
 }
