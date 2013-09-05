@@ -80,29 +80,29 @@ public class Element {
 		return parent;
 	}
 
-	public void setParent(Element parent) {
+	public void setParent(Element parent) throws TAFSException {
 		if(type == "drive")
 			this.parent = parent;
 		else
-			//TODO throw illegal op
+			throw new TAFSException("Illegal File System Operation");
 	}
 
-	public void addChild(Element child) {
+	public void addChild(Element child) throws TAFSException {
 		if(type != "text")
 			for(Element e:children) {
 				if(e.getName() != child.getName())
 					children.add(child);
 				else
-					//TODO throw path exists
+					throw new TAFSException("Path already exists");
 			}
 		else
-			//TODO illegal op
+			throw new TAFSException("Illegal File System Operation");
 	}
 
-	public void removeChild(Element child) {
+	public void removeChild(Element child) throws TAFSException {
 		if(type != "text")
 			if(!children.remove(child))
-				//TODO throw path not found
+				throw new TAFSException("Path Not Found");
 	}
 
 	public void print(int depth) {
