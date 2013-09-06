@@ -40,12 +40,24 @@ public class TAFS {
 	}
 
 	public void move(String source, String target) {
-		//TODO Exceptions: path not found; path already exists
-
+		try {
+			Element src = search(source);
+			Element tgt = search(target.substring(0, target.lastIndexOf("/")));
+			tgt.addChild(src);
+			//maybe something hashcode-related. will look into to see if this can be more concise.
+			src.getParent().removeChild(search(source));
+		} catch (TAFSException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void writeToFile(String path, String contents) {
-		//TODO Exceptions: path not found; not a text file 
+		try {
+			Element pwd = search(path);
+			pwd.setContents(contents);
+		} catch (TAFSException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 
