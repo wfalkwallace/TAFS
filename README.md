@@ -62,3 +62,4 @@ Unfinished: first attempt/idea-salad; more object oriented (types are all indivi
 Way better: not as good a portrayal of object-oriented principles, maybe, but overriding equals and using class.forName are less-than-reliable/secure; it's also all in memory, so a B+tree is unnecessarily complicated. Since the guidelines called for a "type" _parameter_ for create commands, this was way simpler.
 
 #####Lessons Learned:
+Came out fine. not all that OO, might've been better split up like the above , but given parameters this was the best/simplest/clearest
