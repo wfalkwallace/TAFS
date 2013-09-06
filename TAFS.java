@@ -15,25 +15,30 @@ public class TAFS {
 	//TODO illegal file system operation
 
 
-	private void create(String type, String name, String path) {
+	public void create(String type, String name, String path) {
 		//TODO Exceptions: path not found
 		String[] pathlist = path.split("/");
 		try {
 			if(pathlist.length > 1) {
-				Element pwd;
+				Element pwd = null;
 				for(Element e:root)
 					if(e.getName().equals(pathlist[0])) {
 						pwd = e;
 						break;
 					}
-				for(int i = 1; i < pathlist.length - 1; i++){
-					for(Element e:pwd.getChildren())
-						if(e.getName().equals(pathlist[i])) {
-							pwd = e;
-							break;
-						}
+				if(pwd != null) {
+					for(int i = 1; i < pathlist.length - 1; i++){
+						for(Element e:pwd.getChildren())
+							if(e.getName().equals(pathlist[i])) {
+								pwd = e;
+								break;
+							}
+					}
+					pwd.addChild(new Element(name, type, pwd));
 				}
-				pwd.addChild(new Element(name, type, pwd));
+				else
+					throw new TAFSException("Path not found");
+
 			}
 			else
 				if(type.equals("drive"))
@@ -45,7 +50,10 @@ public class TAFS {
 		}
 	}
 
-
+	public void print() {
+		for(Element d:root)
+			d.print(0);
+	}
 
 	delete(String path) {
 		//TODO Exceptions: path not found
