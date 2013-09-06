@@ -29,14 +29,18 @@ public class TAFSH {
 
 		tafs.print();
 
-		String[] cmd;
+		String cmd;
+		String[] arg;
 		while(true) {
 			if(user.hasNextLine()){
-				cmd = user.nextLine().split(" ");
-				switch(cmd[0]) {
+				cmd = user.nextLine();
+				arg = cmd.split(" ");
+				switch(arg[0]) {
 				case "create":
+					tafs.create(arg[1], arg[2], arg[3]);
 					break;
 				case "delete":
+					tafs.
 					break;
 				case "move":
 					break;
