@@ -12,39 +12,12 @@ public class TAFS {
 
 	private ArrayList<Element> root = new ArrayList<Element>();
 
-	//TODO illegal file system operation
-
-
 	public void create(String type, String name, String path) {
-		//TODO Exceptions: path not found
-		String[] pathlist = path.split("/");
 		try {
-			if(pathlist.length > 1) {
-				Element pwd = null;
-				for(Element e:root)
-					if(e.getName().equals(pathlist[0])) {
-						pwd = e;
-						break;
-					}
-				if(pwd != null) {
-					for(int i = 1; i < pathlist.length - 1; i++){
-						for(Element e:pwd.getChildren())
-							if(e.getName().equals(pathlist[i])) {
-								pwd = e;
-								break;
-							}
-					}
-					pwd.addChild(new Element(name, type, pwd));
-				}
-				else
-					throw new TAFSException("Path not found");
-
-			}
-			else
-				if(type.equals("drive"))
-					root.add(new Element(name));
-				else
-					throw new TAFSException("Illegal File System Operation");
+			//search 
+			Element pwd = search(path.substring(0, path.lastIndexOf("/")));
+			if(pwd != null)
+				pwd.addChild(new Element(name, type, pwd));
 		} catch (TAFSException e) {
 			System.out.println(e.getMessage());
 		}
@@ -55,19 +28,62 @@ public class TAFS {
 			d.print(0);
 	}
 
-	delete(String path) {
+	public void delete(String path) {
 		//TODO Exceptions: path not found
 	}
 
-	move(String source, String target) {
+	public void move(String source, String target) {
 		//TODO Exceptions: path not found; path already exists
 
 	}
 
-	writeToFile(String path, String contents) {
+	public void writeToFile(String path, String contents) {
 		//TODO Exceptions: path not found; not a text file 
 	}
 
-	//TODO search
+
+	public Element search(String path) {
+		try {
+			String[] pathlist = path.split("/");
+			Element pwd = null;
+
+			//is there a path to search for?
+			if(root.size() > 0) {
+				//get drive
+				for(Element e:root)
+					if(e.getName().equals(pathlist[0])) {
+						pwd = e;
+						break;
+					}
+			}
+			//no path? no problem!
+			else
+				throw new TAFSException("Path not found");
+
+			//found the drive?
+			if(pwd != null) {
+				//iterate over the rest of the path
+				for(int i = 1; i < pathlist.length; i++){
+					for(Element e:pwd.getChildren())
+						if(e.getName().equals(pathlist[i])) {
+							pwd = e;
+							break;
+						}
+					//pwd didnt contain the next item in path?
+					if(!pwd.getName().equals(pathlist[i]))
+						throw new TAFSException("Path not found");
+				}
+				return pwd;
+			}
+			//didnt find the drive?
+			else
+				throw new TAFSException("Path not found");
+		} catch (TAFSException e) {
+			System.out.println(e.getMessage());
+			return null;
+		}
+
+	}
+
 
 }
