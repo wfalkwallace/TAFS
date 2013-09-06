@@ -76,8 +76,11 @@ public class Element {
 		return size;
 	}
 
-	public ArrayList<Element> getChildren() {
-		return children;
+	public ArrayList<Element> getChildren() throws TAFSException {
+		if(children != null)
+			return children;
+		else
+			throw new TAFSException("Illegal File System Operation");
 	}
 
 	public Element getParent() {
@@ -116,5 +119,17 @@ public class Element {
 		for(Element e:children) {
 			e.print(depth + 1);
 		}
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getContents() {
+		return contents;
+	}
+
+	public void setContents(String contents) {
+		this.contents = contents;
 	}
 }
