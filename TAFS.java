@@ -29,7 +29,14 @@ public class TAFS {
 	}
 
 	public void delete(String path) {
-		//TODO Exceptions: path not found
+		try {
+			//search 
+			Element pwd = search(path);
+			if(pwd != null)
+				pwd.getParent().removeChild(pwd);
+		} catch (TAFSException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 
 	public void move(String source, String target) {
