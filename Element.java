@@ -107,9 +107,10 @@ public class Element {
 	}
 
 	public void removeChild(Element child) throws TAFSException {
-		if(!type.equals("text"))
-			if(!children.remove(child))
-				throw new TAFSException("Path Not Found");
+		if(children.indexOf(child) > -1)
+			children.remove(child);
+		else
+			throw new TAFSException("Path Not Found");
 	}
 
 	public void print(int depth) {
