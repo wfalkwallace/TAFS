@@ -126,11 +126,18 @@ public class Element {
 		return type;
 	}
 
-	public String getContents() {
-		return contents;
+	public String getContents() throws TAFSException {
+		if(type.equals("text"))
+			return contents;
+		else 
+			throw new TAFSException("Illegal File System Operation");
+
 	}
 
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContents(String contents) throws TAFSException {
+		if(type.equals("text"))
+			this.contents = contents;
+		else 
+			throw new TAFSException("Not a text File");
 	}
 }
