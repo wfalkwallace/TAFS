@@ -26,6 +26,7 @@ public class TAFSH {
 		
 		tafs.print();
 		
+		//TODO command handling/illegal fs op
 	}
 
 }
