@@ -24,17 +24,19 @@ public class TAFSH {
 				"	create <drive/folder/zip/text> <name> <path-of-parent> - create given entity\n" +
 				"	delete <path> - remove element\n" +
 				"	move <source path> <target path> - move element\n" +
-				"	write <path> <content> - (over)write to text file" +
-				"	print - print system hierarchy\n\n");
-
-		tafs.print();
+				"	write <path> <content> - (over)write to text file\n" +
+				"	print - print system hierarchy\n" +
+				"	quit - exit the system\n\n");
 
 		String cmd;
 		String[] arg;
+		//iterate until quit
 		while(true) {
 			if(user.hasNextLine()){
+				//get and break down command
 				cmd = user.nextLine();
 				arg = cmd.split(" ");
+				//switch over input command
 				switch(arg[0]) {
 				case "create":
 					tafs.create(arg[1], arg[2], arg[3]);
@@ -43,19 +45,21 @@ public class TAFSH {
 					tafs.delete(arg[1]);
 					break;
 				case "move":
+					tafs.move(arg[1], arg[2]);
 					break;
 				case "write":
+					tafs.writeToFile(arg[1], cmd.substring(cmd.indexOf(" ")));
 					break;
 				case "print":
+					tafs.print();
 					break;
+				case "quit":
+					user.close();
+					System.exit(0);
 				default:
 					System.out.println("Illegal file system operation");
 				}
 			}
 		}
-
-
-		//TODO command handling/illegal fs op
 	}
-
 }
