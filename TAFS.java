@@ -12,10 +12,17 @@ public class TAFS {
 
 	private ArrayList<Element> root = new ArrayList<Element>();
 
+	/**
+	 * Create a file system entity
+	 * @param type drive/folder/zip/text
+	 * @param name file name
+	 * @param path path to intended parent from root (not opened or closed with /)
+	 */
 	public void create(String type, String name, String path) {
 		try {
 			//search 
-			Element pwd = search(path.substring(0, path.lastIndexOf("/")));
+			//path parameter is path to parent
+			Element pwd = search(path);
 			if(pwd != null)
 				pwd.addChild(new Element(name, type, pwd));
 		} catch (TAFSException e) {
@@ -23,11 +30,18 @@ public class TAFS {
 		}
 	}
 
+	/**
+	 * Print file system hierarchy
+	 */
 	public void print() {
 		for(Element d:root)
 			d.print(0);
 	}
 
+	/**
+	 * Delete a file system entity
+	 * @param path path from root to entity (not opened or closed with /)
+	 */
 	public void delete(String path) {
 		try {
 			//search 
@@ -39,6 +53,11 @@ public class TAFS {
 		}
 	}
 
+	/**
+	 * Move entity to new location
+	 * @param source original path
+	 * @param target intended new path
+	 */
 	public void move(String source, String target) {
 		try {
 			Element src = search(source);
@@ -51,6 +70,11 @@ public class TAFS {
 		}
 	}
 
+	/**
+	 * Write contents to text file
+	 * @param path location of text file for editing
+	 * @param contents new text file contents (overwrites)
+	 */
 	public void writeToFile(String path, String contents) {
 		try {
 			Element pwd = search(path);
@@ -60,7 +84,11 @@ public class TAFS {
 		}
 	}
 
-
+	/**
+	 * Find file system entities from root
+	 * @param path item to find/get
+	 * @return specified file system entity
+	 */
 	public Element search(String path) {
 		try {
 			String[] pathlist = path.split("/");
